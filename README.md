@@ -1,3 +1,5 @@
+# Carleton Course Manager (JAVA)
+
 Developer: Jeremy Tran-Perez
 Version: 1.0.1
 
