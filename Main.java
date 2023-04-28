@@ -1,63 +1,27 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
 
 public class Main {
 
-    public static int printMenu(){
-
-        Scanner scannerObject = new Scanner(System.in);
-        int input;
-        System.out.println("-----------------------------------");
-        System.out.println("OPTION MENU");
-        System.out.println("[1] Display all courses");
-        System.out.println("[2] Import new data");
-        System.out.println("[3] Sort courses by grade");
-        System.out.println("[4] Search courses by year level");
-        System.out.println("[5] Search courses by department");
-        System.out.println("[6] Print GPA");
-        System.out.println("[0] Quit");
-        System.out.print("\nInput: ");
-
-        if(scannerObject.hasNextInt()){
-            input = scannerObject.nextInt();
-        } else {
-            input = -1;
-        }
-
-        System.out.println("-----------------------------------");
-        scannerObject = null;
-        return input;
-    }
-
     public static void main(String[] args) throws Exception{
 
         CourseList courseList = new CourseList();  
         Scanner userInput = new Scanner(System.in);
+        String tempString = "";
+        String fileName = "";
 
         if(args.length > 0){
             courseList.importData(new File(args[0]));
-        }
-        
-        String tempString;
-        String fileName;
-        
-        if(args.length > 0){
             fileName = args[0];
-        } else {
-            fileName = "";
         }
-
+        
         while(true){
-
-            switch(printMenu()){
-
+            switch(View.printMenu()){
                 case 1:
                     if(courseList.size() == 0){
                         System.out.println("\nFile is empty or not specified.\n");
                     } else {
                         System.out.println("\nAll courses listed in file \"" + fileName + "\":\n");
-
                         for(Course course : courseList){
                             System.out.println(course.toString());
                         } 
@@ -156,4 +120,5 @@ public class Main {
             }
         }
     }
+
 }
