@@ -1,10 +1,9 @@
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class CourseList extends ArrayList<Course>{
-
-    public CourseList(){
-
-    }
 
     public double calculateGPA(){
 
@@ -12,8 +11,6 @@ public class CourseList extends ArrayList<Course>{
         double totalGradePoints = 0;
 
         for(Course course : this){
-
-            // Checks if a course was academically withdrawn
             if(course.getLetterGradeEnum() != GradePointScale.WDN){
                 totalCredits += course.getCredit();
                 totalGradePoints += course.getGradePoint();   
@@ -22,6 +19,33 @@ public class CourseList extends ArrayList<Course>{
 
         return totalGradePoints / totalCredits;
     }
+
+
+
+    public boolean importData(File file) throws FileNotFoundException{
+
+        if(!(file.exists() && !file.isDirectory())){
+            System.out.println("\n[!] The file you specified does not exist. [!]\n");
+            return false;
+        }
+
+        this.clear();
+
+        Scanner sc = new Scanner(file);
+
+        String[] currentLine;
+        while(sc.hasNextLine()){
+            currentLine = sc.nextLine().split(" ");
+            this.add(new Course(currentLine[0], Integer.parseInt(currentLine[1]), Credit.valueOf(currentLine[2]) , GradePointScale.valueOf(currentLine[3])));
+        }
+
+        sc.close();
+
+        return true;
+    }
+
+
+
 
 
 }
