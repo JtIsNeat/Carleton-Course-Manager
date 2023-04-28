@@ -20,8 +20,6 @@ public class CourseList extends ArrayList<Course>{
         return totalGradePoints / totalCredits;
     }
 
-
-
     public boolean importData(File file) throws FileNotFoundException{
 
         if(!(file.exists() && !file.isDirectory())){
@@ -43,9 +41,5 @@ public class CourseList extends ArrayList<Course>{
 
         return true;
     }
-
-
-
-
 
 }
